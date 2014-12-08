@@ -1,0 +1,104 @@
+print("Ingresa la cantidad de metros cuadrados de las aspas instaladas: ")
+metros=int(input("metros: "))
+total = float(metros*float(2.7))
+print("La tarifa por los watts consumidos es: $"+str(round(total),))
+
+
+import re
+print("Generando documento, espere un momento")
+clima = open("clima.csv","r")
+rango = open("generacion.csv","r")
+res = open("ListaWatts.csv","w")
+
+movv = []
+
+for line in clima:
+    pks = re.compile(r'\d*\-\d*\-\d*,\d*\,\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*\,\-?\d*')
+    contt = re.findall(pks, line)
+    if contt != []:
+        movv.append(contt)
+
+tss=[]
+rem =[]
+for x in range(len(movv)):
+    str(movv[x][0])
+    tss = movv[x][0].split(",")
+    rem.append(tss)
+
+lista6 =0
+for x in range(len(rem)):
+    lista6 = int((int(rem[x][17])/3.6))
+    rem[x][17] = lista6
+
+for x in range(len(rem)):
+    if int(rem[x][17]) >= 23:
+        rem[x][17] = 7452.3
+    elif int(rem[x][17]) == 1:
+        rem[x][17] = 0.6
+    elif int(rem[x][17]) == 2:
+        rem[x][17] = 4.9
+    elif int(rem[x][17]) == 3:
+        rem[x][17] = 16.5
+    elif int(rem[x][17]) == 4:
+        rem[x][17] = 39.2
+    elif int(rem[x][17]) == 5:
+        rem[x][17] = 76.5
+    elif int(rem[x][17]) == 6:
+        rem[x][17] = 132.3
+    elif int(rem[x][17]) == 7:
+        rem[x][17] = 210.1
+    elif int(rem[x][17]) == 8:
+        rem[x][17] = 313.6
+    elif int(rem[x][17]) == 9:
+        rem[x][17] = 446.5
+    elif int(rem[x][17]) == 10:
+        rem[x][17] = 612.5
+    elif int(rem[x][17]) == 11:
+        rem[x][17] = 815.2
+    elif int(rem[x][17]) == 12:
+        rem[x][17] = 1058.4
+    elif int(rem[x][17]) == 13:
+        rem[x][17] = 1345.7
+    elif int(rem[x][17]) == 14:
+        rem[x][17] = 1680.7
+    elif int(rem[x][17]) == 15:
+        rem[x][17] = 2067.2
+    elif int(rem[x][17]) == 16:
+        rem[x][17] = 2508.8
+    elif int(rem[x][17]) == 17:
+        rem[x][17] = 3009.2
+    elif int(rem[x][17]) == 18:
+        rem[x][17] = 3572.1
+    elif int(rem[x][17]) == 19:
+        rem[x][17] = 4201.1
+    elif int(rem[x][17]) == 20:
+        rem[x][17] = 4900
+    elif int(rem[x][17]) == 21:
+        rem[x][17] = 5672.4
+    elif int(rem[x][17]) == 22:
+        rem[x][17] = 6521.9
+    else:
+        ()
+
+y = 0
+total = 0
+for x in range(len(rem)):
+    y = round((float(rem[x][17])*(0.0027)),4)
+    rem[x][17] = y
+    total+= y
+    
+
+res.write("fecha, cantidad generada\n")
+for x in range(len(rem)):
+    res.write(str(rem[x][0])+","+str(rem[x][17])+"\n")
+
+
+res.close()
+rango.close()
+clima.close()
+
+print("listo!")
+
+print("Total ahorrado durante todo el año: $"+str(round(total,2)))
+
+end = input("")
